@@ -22,9 +22,10 @@ export function AuthCallback() {
         setUser({
           username: user.name,
           email: user.email,
+          avatar: user.image ?? "",
         });
 
-        router.replace("/");
+        router.replace("/dashboard");
       } catch (err) {
         if (cancelled) return;
 

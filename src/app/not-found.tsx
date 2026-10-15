@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="text-center">
         <h1 className="font-bold text-7xl">404</h1>
         <p className="text-sm sm:text-lg font-light text-neutral-900/80 leading-relaxed mb-4">Oops… this page took a wrong turn. It might be off exploring the internet somewhere. Let’s get you back on track.</p>
-        <Link href="/">
+        <Link href="/dashboard">
           <Button>
             <ArrowLeft />
             Go back to home

@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 type AuthUser = {
   username: string;
   email: string;
+  avatar: string;
 }
 
 type AuthState = {
