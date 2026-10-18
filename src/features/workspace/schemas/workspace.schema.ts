@@ -9,3 +9,9 @@ export const updateWorkspaceSchema = createWorkspaceSchema;
 export type CreateWorkspaceSchema = z.infer<typeof createWorkspaceSchema>;
 export type UpdateWorkspaceSchema = z.infer<typeof updateWorkspaceSchema>;
 
+export const addMemberSchema = z.object({
+  userId: z.string({ error: "Please select a user." }).min(1, { error: "Please select a user." }),
+});
+
+export type AddMemberSchema = z.infer<typeof addMemberSchema>;
+

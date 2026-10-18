@@ -1,18 +1,35 @@
+export type WorkspaceMember = {
+  userId: string;
+  role: string;
+  user: {
+    id: string;
+    name: string;
+  }
+}
+
 export type Workspace = {
   id: string;
   name: string;
   description: string;
+  authorId: string;
   createdAt: string;
   updatedAt: string;
-  _count: {
+  workspaceMembers?: WorkspaceMember[];
+  _count?: {
     workspaceMembers: number;
   };
+}
+
+export type GetWorkspacesResponse = {
+  success: boolean;
+  message: string;
+  data: Workspace[];
 }
 
 export type GetWorkspaceResponse = {
   success: boolean;
   message: string;
-  data: Workspace[];
+  data: Workspace;
 }
 
 export type CreateWorkspaceResponse = {
@@ -22,3 +39,15 @@ export type CreateWorkspaceResponse = {
 }
 
 export type UpdateWorkspaceResponse = CreateWorkspaceResponse;
+
+export type AvailableUser = {
+  id: string;
+  name: string;
+  email?: string;
+};
+
+export type AddMemberResponse = {
+  success: boolean;
+  message: string;
+  data: WorkspaceMember;
+};

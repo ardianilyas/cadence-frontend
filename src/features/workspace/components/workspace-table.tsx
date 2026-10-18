@@ -2,6 +2,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Workspace } from "@/features/workspace/types/workspace.type";
 import { formatDate } from "@/lib/format-date";
 import { WorkspaceActions } from "@/features/workspace/components/workspace-actions";
+import Link from "next/link";
 
 type WorkspaceTableProps = {
   workspaces: Workspace[]
@@ -29,8 +30,10 @@ export default function WorkspaceTable({ workspaces }: WorkspaceTableProps) {
                 {i + 1}
               </TableCell>
 
-              <TableCell className="font-medium">
-                {workspace.name}
+              <TableCell className="font-medium underline underline-offset-3 hover:text-blue-600 transition-colors ease-in-out">
+                <Link href={`/dashboard/workspaces/${workspace.id}`}>
+                  {workspace.name}
+                </Link>
               </TableCell>
 
               <TableCell className="max-w-75 truncate text-muted-foreground">
@@ -38,7 +41,7 @@ export default function WorkspaceTable({ workspaces }: WorkspaceTableProps) {
               </TableCell>
 
               <TableCell className="text-muted-foreground">
-                {workspace._count.workspaceMembers}
+                {workspace._count?.workspaceMembers}
               </TableCell>
 
               <TableCell className="text-muted-foreground">
