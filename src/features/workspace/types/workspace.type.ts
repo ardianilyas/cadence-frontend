@@ -1,6 +1,8 @@
+import { WorkspaceRole } from "@/features/workspace/schemas/workspace.schema";
+
 export type WorkspaceMember = {
   userId: string;
-  role: string;
+  role: WorkspaceRole;
   user: {
     id: string;
     name: string;

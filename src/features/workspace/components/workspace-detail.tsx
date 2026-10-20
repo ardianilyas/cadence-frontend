@@ -3,6 +3,9 @@
 import { useWorkspace } from "@/features/workspace/hooks/use-get-workspace";
 import WorkspaceMembersTable from "@/features/workspace/components/workspace-members-table";
 import AddMember from "@/features/workspace/components/add-member";
+import { Button } from "@/components/ui/button";
+import { FolderX, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 type WorkspaceDetailProps = {
   workspaceId: string;
@@ -19,13 +22,31 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
 
   if (isError) {
     return (
-      <div className="space-y-3">
-        <button
-          onClick={() => refetch()}
-          className="text-sm underline underline-offset-4"
-        >
-          Try again
-        </button>
+      <div className="flex items-center justify-center min-h-100">
+        <div className="text-center space-y-6 max-w-md">
+          <div className="flex justify-center">
+            <div className="rounded-full bg-muted p-6">
+              <FolderX className="size-12 text-muted-foreground" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold tracking-tight">Workspace not found</h2>
+            <p className="text-muted-foreground">
+              The workspace you're looking for doesn't exist or you don't have access to it.
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-3">
+            <Button onClick={() => refetch()} variant="outline">
+              Try again
+            </Button>
+            <Link href="/dashboard/workspaces">
+              <Button variant="ghost">
+                <ArrowLeft className="mr-2 size-4" />
+                Back to workspaces
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,8 +1,8 @@
 import { WorkspaceMember } from "@/features/workspace/types/workspace.type";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { snakeToSpaces } from "@/helpers/snake-to-spaces";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 import { MemberRowActions } from "@/features/workspace/components/remove-member-action";
+import RoleBadge from "@/components/role-badge";
 
 type WorkspaceMembersTableProps = {
   workspaceId: string;
@@ -34,7 +34,9 @@ export default function WorkspaceMembersTable({ workspaceId, workspaceMembers }:
                   {member.user.name}
                   {isCurrentUser && <span className="text-muted-foreground"> (you)</span>}
                 </TableCell>
-                <TableCell>{snakeToSpaces(member.role)}</TableCell>
+                <TableCell>
+                  <RoleBadge role={member.role} />
+                </TableCell>
                 <TableCell>
                   <MemberRowActions workspaceId={workspaceId} member={member} />
                 </TableCell>
