@@ -29,8 +29,10 @@ import { useAddMember } from "@/features/workspace/hooks/use-add-member";
 import {
   addMemberSchema,
   type AddMemberSchema,
+  WorkspaceRole,
 } from "@/features/workspace/schemas/workspace.schema";
 import type { AvailableUser } from "@/features/workspace/types/workspace.type";
+import { snakeToSpaces } from "@/helpers/snake-to-spaces";
 
 type AddMemberProps = {
   workspaceId: string;
@@ -46,6 +48,11 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
     [users]
   );
 
+  const roleSelectItems = useMemo(
+    () => Object.values(WorkspaceRole).map((role) => ({ value: role, label: snakeToSpaces(role) })),
+    []
+  );
+
   const {
     control,
     handleSubmit,
@@ -55,6 +62,7 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
     resolver: zodResolver(addMemberSchema),
     defaultValues: {
       userId: "",
+      role: WorkspaceRole.Developer,
     },
   });
 
@@ -135,6 +143,46 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
             {errors.userId && (
               <p className="text-sm text-destructive">
                 {errors.userId.message}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2 w-full">
+            <Label htmlFor="role-select">Role</Label>
+            <Controller
+              control={control}
+              name="role"
+              render={({ field }) => (
+                <Select
+                  items={roleSelectItems}
+                  value={field.value || null}
+                  onValueChange={(val) => field.onChange(val ?? WorkspaceRole.Developer)}
+                  disabled={addMemberMutation.isPending}
+                >
+                  <SelectTrigger
+                    id="role-select"
+                    className="w-full"
+                    aria-invalid={!!errors.role}
+                  >
+                    <SelectValue placeholder="Select role" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectGroup>
+                      {roleSelectItems.map((item) => (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+
+            {errors.role && (
+              <p className="text-sm text-destructive">
+                {errors.role.message}
               </p>
             )}
           </div>
