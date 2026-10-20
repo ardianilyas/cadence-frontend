@@ -49,7 +49,7 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
             </h2>
             <AddMember workspaceId={workspaceId} />
           </div>
-          <WorkspaceMembersTable workspaceMembers={workspace.workspaceMembers} />
+          <WorkspaceMembersTable workspaceId={workspaceId} workspaceMembers={workspace.workspaceMembers} />
         </div>
       )}
 

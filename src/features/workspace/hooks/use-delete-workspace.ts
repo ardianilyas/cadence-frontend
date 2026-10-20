@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { workspaceKeys } from "@/features/workspace/hooks/use-workspaces";
 import { toast } from "sonner";
 import { deleteWorkspace } from "@/features/workspace/api/delete-workspace";
+import { workspaceKeys } from "@/features/workspace/constants/workspace-key.constant";
 
 export function useDeleteWorkspace() {
   const queryClient = useQueryClient();

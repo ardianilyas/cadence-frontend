@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createWorkspace } from "@/features/workspace/api/create-workspace";
-import { workspaceKeys } from "@/features/workspace/hooks/use-workspaces";
 import { toast } from "sonner";
 import axios from "axios";
+import { workspaceKeys } from "@/features/workspace/constants/workspace-key.constant";
 
 export function useCreateWorkspace() {
   const queryClient = useQueryClient();
