@@ -3,9 +3,11 @@
 import { useWorkspace } from "@/features/workspace/hooks/use-get-workspace";
 import WorkspaceMembersTable from "@/features/workspace/components/workspace-members-table";
 import AddMember from "@/features/workspace/components/add-member";
+import { WorkspaceDetailSkeleton } from "@/features/workspace/components/workspace-detail-skeleton";
 import { Button } from "@/components/ui/button";
 import { FolderX, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { ProjectsList } from "@/features/project/components/projects-list";
 
 type WorkspaceDetailProps = {
   workspaceId: string;
@@ -15,9 +17,7 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
   const { data: workspace, isPending, isError, refetch } = useWorkspace(workspaceId);
 
   if (isPending) {
-    return (
-      <div>Loading...</div>
-    )
+    return <WorkspaceDetailSkeleton />;
   }
 
   if (isError) {
@@ -54,13 +54,24 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {workspace.name}
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {workspace.description || "No description provided."}
-        </p>
+        <div>
+          <div className="flex items-center gap-2">
+            <Link href="/dashboard/workspaces">
+              <Button variant="ghost" size="icon">
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
+            <h1 className="text-2xl font-semibold tracking-tight">
+              {workspace.name}
+            </h1>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {workspace.description || "No description provided."}
+          </p>
+        </div>
       </div>
+
+      <ProjectsList workspaceId={workspaceId} />
 
       {workspace.workspaceMembers?.length && (
         <div className="space-y-3">
@@ -70,6 +81,7 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
             </h2>
             <AddMember workspaceId={workspaceId} />
           </div>
+
           <WorkspaceMembersTable workspaceId={workspaceId} workspaceMembers={workspace.workspaceMembers} />
         </div>
       )}
