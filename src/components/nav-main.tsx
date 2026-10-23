@@ -1,39 +1,38 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { CirclePlusIcon, MailIcon } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { CirclePlusIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 
 export function NavMain({
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon?: React.ReactNode
-  }[]
+    title: string;
+    url: string;
+    icon?: React.ReactNode;
+  }[];
 }) {
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-          </SidebarMenuItem>
+          <SidebarMenuItem className="flex items-center gap-2"></SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <Link href={item.url}>
                 <SidebarMenuButton tooltip={item.title}>
-                    {item.icon}
-                    <span>{item.title}</span>
+                  {item.icon}
+                  <span>{item.title}</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
@@ -41,5 +40,5 @@ export function NavMain({
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }

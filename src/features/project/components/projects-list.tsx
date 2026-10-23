@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useGetProjectsByWorkspaceId } from "@/features/project/hooks/use-get-workspace-by-id";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,10 +10,15 @@ import { ProjectsTable } from "@/features/project/components/projects-table";
 
 type ProjectsListProps = {
   workspaceId: string;
-}
+};
 
 export function ProjectsList({ workspaceId }: ProjectsListProps) {
-  const { data: projects, isLoading, isError, refetch } = useGetProjectsByWorkspaceId(workspaceId);
+  const {
+    data: projects,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetProjectsByWorkspaceId(workspaceId);
 
   if (isLoading) {
     return (
@@ -51,7 +56,9 @@ export function ProjectsList({ workspaceId }: ProjectsListProps) {
             <div className="rounded-full bg-muted p-3 mb-3">
               <FolderX className="size-6 text-muted-foreground" />
             </div>
-            <p className="text-sm text-muted-foreground mb-3">Failed to load projects</p>
+            <p className="text-sm text-muted-foreground mb-3">
+              Failed to load projects
+            </p>
             <Button size="sm" variant="outline" onClick={() => refetch()}>
               <RefreshCw className="mr-2 size-3.5" />
               Retry
@@ -72,7 +79,9 @@ export function ProjectsList({ workspaceId }: ProjectsListProps) {
         <Card size="sm">
           <CardContent className="flex flex-col items-center justify-center py-8 text-center">
             <p className="text-sm text-muted-foreground">No projects yet</p>
-            <p className="text-xs text-muted-foreground mt-1">Create your first project to get started</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              Create your first project to get started
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -86,7 +95,7 @@ export function ProjectsList({ workspaceId }: ProjectsListProps) {
         <AddProject workspaceId={workspaceId} />
       </div>
       <div className="rounded-md border p-2">
-        <ProjectsTable projects={projects} />
+        <ProjectsTable projects={projects} workspaceId={workspaceId} />
       </div>
     </div>
   );

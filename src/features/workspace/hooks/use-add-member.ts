@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { handleApiError } from "@/lib/handle-api-error";
 import { workspaceKeys } from "@/features/workspace/constants/workspace-key.constant";
 
-export function useAddMember(workspaceId?: string) {
+export function useAddMember(workspaceId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -34,6 +34,9 @@ export function useAddMember(workspaceId?: string) {
           }),
           queryClient.invalidateQueries({
             queryKey: workspaceKeys.availableUsers(id),
+          }),
+          queryClient.invalidateQueries({
+            queryKey: workspaceKeys.workspaceMembers(workspaceId),
           }),
           queryClient.invalidateQueries({
             queryKey: workspaceKeys.lists(),

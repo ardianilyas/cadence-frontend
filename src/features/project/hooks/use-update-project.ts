@@ -11,8 +11,15 @@ export function useUpdateProject() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ workspaceId, projectId, payload }: { workspaceId: string; projectId: string; payload: UpdateProjectSchema }) =>
-      updateProject(workspaceId, projectId, payload),
+    mutationFn: ({
+      workspaceId,
+      projectId,
+      payload,
+    }: {
+      workspaceId: string;
+      projectId: string;
+      payload: UpdateProjectSchema;
+    }) => updateProject(workspaceId, projectId, payload),
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({

@@ -1,12 +1,20 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Workspace } from "@/features/workspace/types/workspace.type";
 import { formatDate } from "@/lib/format-date";
 import { WorkspaceActions } from "@/features/workspace/components/workspace-actions";
 import Link from "next/link";
 
 type WorkspaceTableProps = {
-  workspaces: Workspace[]
-}
+  workspaces: Workspace[];
+};
 
 export default function WorkspaceTable({ workspaces }: WorkspaceTableProps) {
   return (
@@ -26,9 +34,7 @@ export default function WorkspaceTable({ workspaces }: WorkspaceTableProps) {
         <TableBody>
           {workspaces?.map((workspace, i) => (
             <TableRow key={workspace.id}>
-              <TableCell className="font-medium">
-                {i + 1}
-              </TableCell>
+              <TableCell className="font-medium">{i + 1}</TableCell>
 
               <TableCell className="font-medium underline underline-offset-3 hover:text-blue-600 transition-colors ease-in-out">
                 <Link href={`/dashboard/workspaces/${workspace.id}`}>
@@ -54,7 +60,7 @@ export default function WorkspaceTable({ workspaces }: WorkspaceTableProps) {
             </TableRow>
           ))}
         </TableBody>
-    </Table>
+      </Table>
     </div>
-  )
+  );
 }

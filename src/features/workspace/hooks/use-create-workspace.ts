@@ -12,7 +12,7 @@ export function useCreateWorkspace() {
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: workspaceKeys.lists()
+        queryKey: workspaceKeys.lists(),
       });
 
       toast.success("Workspace created successfully");
@@ -24,9 +24,7 @@ export function useCreateWorkspace() {
         : undefined;
 
       toast.error(
-        typeof message === "string"
-          ? message
-          : "Failed to create workspace.",
+        typeof message === "string" ? message : "Failed to create workspace.",
       );
     },
   });

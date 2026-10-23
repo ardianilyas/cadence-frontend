@@ -6,5 +6,5 @@ export default function SignIn() {
     <Suspense fallback={null}>
       <SignInPage />
     </Suspense>
-  )
+  );
 }

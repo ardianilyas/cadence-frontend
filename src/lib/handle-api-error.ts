@@ -15,9 +15,7 @@ export function handleApiError(error: unknown) {
     const response = error.response?.data;
 
     const message =
-      response?.errors?.[0]?.message ??
-      response?.message ??
-      error.message;
+      response?.errors?.[0]?.message ?? response?.message ?? error.message;
 
     toast.error(message);
     return;

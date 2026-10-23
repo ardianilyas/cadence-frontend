@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { snakeToSpaces } from "@/helpers/snake-to-spaces";
 
 type RoleBadgeProps = {
-  role: WorkspaceRole
-}
+  role: WorkspaceRole;
+};
 
 export default function RoleBadge({ role }: RoleBadgeProps) {
   let className;
@@ -13,20 +13,16 @@ export default function RoleBadge({ role }: RoleBadgeProps) {
     case "Project_Manager":
       className = "bg-blue-50 text-blue-700";
       break;
-    case "Developer" :
+    case "Developer":
       className = "bg-violet-50 text-violet-700";
       break;
-    case "Quality_Assurance" :
+    case "Quality_Assurance":
       className = "bg-rose-50 text-rose-700";
       break;
-    default :
+    default:
       className = "bg-gray-50 text-gray-700";
       break;
   }
 
-  return (
-    <Badge className={className}>
-      {snakeToSpaces(role)}
-    </Badge>
-  )
+  return <Badge className={className}>{snakeToSpaces(role)}</Badge>;
 }

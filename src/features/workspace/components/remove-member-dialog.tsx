@@ -19,7 +19,13 @@ type RemoveMemberDialogProps = {
   onConfirm: () => void;
 };
 
-export function RemoveMemberDialog({ open, onOpenChange, memberName, isPending, onConfirm }: RemoveMemberDialogProps) {
+export function RemoveMemberDialog({
+  open,
+  onOpenChange,
+  memberName,
+  isPending,
+  onConfirm,
+}: RemoveMemberDialogProps) {
   return (
     <AlertDialog
       open={open}
@@ -30,21 +36,17 @@ export function RemoveMemberDialog({ open, onOpenChange, memberName, isPending, 
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            Remove workspace member?
-          </AlertDialogTitle>
+          <AlertDialogTitle>Remove workspace member?</AlertDialogTitle>
 
           <AlertDialogDescription>
             Are you sure you want to remove <strong>{memberName}</strong> from
-            this workspace? They will lose access to this
-            workspace. This action cannot be undone.
+            this workspace? They will lose access to this workspace. This action
+            cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isPending}>
-            Cancel
-          </AlertDialogCancel>
+          <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
 
           <AlertDialogAction
             disabled={isPending}

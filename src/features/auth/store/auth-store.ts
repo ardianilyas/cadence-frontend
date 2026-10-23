@@ -5,26 +5,26 @@ type AuthUser = {
   username: string;
   email: string;
   avatar: string;
-}
+};
 
 type AuthState = {
   user: AuthUser | null;
   setUser: (user: AuthUser) => void;
   clearUser: () => void;
-}
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
       setUser: (user) => set({ user }),
-      clearUser: () => set({ user: null })
+      clearUser: () => set({ user: null }),
     }),
     {
       name: "auth-storage",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
-        user: state.user
+        user: state.user,
       }),
     },
   ),

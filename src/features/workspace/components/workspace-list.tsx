@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useWorkspaces } from "@/features/workspace/hooks/use-workspaces";
 import { WorkspaceListSkeleton } from "@/features/workspace/components/workspace-list-skeleton";
@@ -6,10 +6,16 @@ import { Button } from "@/components/ui/button";
 import WorkspaceTable from "@/features/workspace/components/workspace-table";
 
 export function WorkspaceList() {
-  const { data: workspaces, isPending, isError, error, refetch } = useWorkspaces();
+  const {
+    data: workspaces,
+    isPending,
+    isError,
+    error,
+    refetch,
+  } = useWorkspaces();
 
   if (isPending) {
-    return <WorkspaceListSkeleton />
+    return <WorkspaceListSkeleton />;
   }
 
   if (isError) {
@@ -25,7 +31,7 @@ export function WorkspaceList() {
           Try again
         </Button>
       </div>
-    )
+    );
   }
 
   if (!workspaces.length) {
@@ -43,5 +49,5 @@ export function WorkspaceList() {
     <div className="rounded-md border p-2">
       <WorkspaceTable workspaces={workspaces} />
     </div>
-  )
+  );
 }

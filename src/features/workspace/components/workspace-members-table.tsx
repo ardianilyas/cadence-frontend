@@ -1,5 +1,12 @@
 import { WorkspaceMember } from "@/features/workspace/types/workspace.type";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 import { MemberRowActions } from "@/features/workspace/components/remove-member-action";
 import RoleBadge from "@/components/role-badge";
@@ -7,9 +14,12 @@ import RoleBadge from "@/components/role-badge";
 type WorkspaceMembersTableProps = {
   workspaceId: string;
   workspaceMembers: WorkspaceMember[];
-}
+};
 
-export default function WorkspaceMembersTable({ workspaceId, workspaceMembers }: WorkspaceMembersTableProps) {
+export default function WorkspaceMembersTable({
+  workspaceId,
+  workspaceMembers,
+}: WorkspaceMembersTableProps) {
   const username = useAuthStore((state) => state.user?.username);
 
   return (
@@ -32,7 +42,9 @@ export default function WorkspaceMembersTable({ workspaceId, workspaceMembers }:
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>
                   {member.user.name}
-                  {isCurrentUser && <span className="text-muted-foreground"> (you)</span>}
+                  {isCurrentUser && (
+                    <span className="text-muted-foreground"> (you)</span>
+                  )}
                 </TableCell>
                 <TableCell>
                   <RoleBadge role={member.role} />
@@ -46,5 +58,5 @@ export default function WorkspaceMembersTable({ workspaceId, workspaceMembers }:
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }

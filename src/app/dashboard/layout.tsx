@@ -1,11 +1,11 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { SiteHeader } from "@/components/site-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import type { ReactNode } from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import type { CSSProperties, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-}
+};
 
 export default function DashboardLayout({ children }: Props) {
   return (
@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: Props) {
         {
           "--sidebar-width": "calc(var(--spacing) * 72)",
           "--header-height": "calc(var(--spacing) * 12)",
-        } as React.CSSProperties
+        } as CSSProperties
       }
     >
       <AppSidebar variant="inset" />
@@ -29,5 +29,5 @@ export default function DashboardLayout({ children }: Props) {
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -12,8 +12,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, CameraIcon, FileTextIcon, CommandIcon, LayersIcon } from "lucide-react"
+} from "@/components/ui/sidebar";
+import {
+  LayoutDashboardIcon,
+  CameraIcon,
+  FileTextIcon,
+  CommandIcon,
+  LayersIcon,
+} from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/auth-store";
 
 const data = {
@@ -26,27 +32,18 @@ const data = {
     {
       title: "Dashboard",
       url: "/dashboard",
-      icon: (
-        <LayoutDashboardIcon
-        />
-      ),
+      icon: <LayoutDashboardIcon />,
     },
     {
       title: "Workspaces",
       url: "/dashboard/workspaces",
-      icon: (
-        <LayersIcon
-        />
-      ),
+      icon: <LayersIcon />,
     },
   ],
   navClouds: [
     {
       title: "Capture",
-      icon: (
-        <CameraIcon
-        />
-      ),
+      icon: <CameraIcon />,
       isActive: true,
       url: "#",
       items: [
@@ -62,10 +59,7 @@ const data = {
     },
     {
       title: "Proposal",
-      icon: (
-        <FileTextIcon
-        />
-      ),
+      icon: <FileTextIcon />,
       url: "#",
       items: [
         {
@@ -80,10 +74,7 @@ const data = {
     },
     {
       title: "Prompts",
-      icon: (
-        <FileTextIcon
-        />
-      ),
+      icon: <FileTextIcon />,
       url: "#",
       items: [
         {
@@ -97,9 +88,9 @@ const data = {
       ],
     },
   ],
-}
+};
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const user = useAuthStore((state) => state.user)
+  const user = useAuthStore((state) => state.user);
   if (!user) return null;
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -123,5 +114,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

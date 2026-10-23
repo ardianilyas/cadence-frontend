@@ -6,8 +6,8 @@ export type WorkspaceMember = {
   user: {
     id: string;
     name: string;
-  }
-}
+  };
+};
 
 export type Workspace = {
   id: string;
@@ -20,25 +20,25 @@ export type Workspace = {
   _count?: {
     workspaceMembers: number;
   };
-}
+};
 
 export type GetWorkspacesResponse = {
   success: boolean;
   message: string;
   data: Workspace[];
-}
+};
 
 export type GetWorkspaceResponse = {
   success: boolean;
   message: string;
   data: Workspace;
-}
+};
 
 export type CreateWorkspaceResponse = {
   success: boolean;
   message: string;
   data: Workspace;
-}
+};
 
 export type UpdateWorkspaceResponse = CreateWorkspaceResponse;
 

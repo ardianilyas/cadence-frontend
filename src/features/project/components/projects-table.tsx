@@ -1,14 +1,24 @@
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Project } from "@/features/project/types/project.type";
 import { formatDate } from "@/lib/format-date";
 import { ProjectStatusBadge } from "@/components/project-status-badge";
 import { ProjectActions } from "@/features/project/components/project-actions";
+import Link from "next/link";
 
 type ProjectsTableProps = {
-  projects: Project[]
-}
+  projects: Project[];
+  workspaceId: string;
+};
 
-export function ProjectsTable({ projects }: ProjectsTableProps) {
+export function ProjectsTable({ projects, workspaceId }: ProjectsTableProps) {
   return (
     <div className="p-2">
       <Table>
@@ -27,12 +37,15 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
         <TableBody>
           {projects?.map((project, i) => (
             <TableRow key={project.id}>
-              <TableCell className="font-medium">
-                {i + 1}
-              </TableCell>
+              <TableCell className="font-medium">{i + 1}</TableCell>
 
               <TableCell className="font-medium">
-                {project.name}
+                <Link
+                  href={`/dashboard/workspaces/${workspaceId}/projects/${project.id}`}
+                  className="hover:underline"
+                >
+                  {project.name}
+                </Link>
               </TableCell>
 
               <TableCell className="max-w-75 truncate text-muted-foreground">
@@ -59,5 +72,5 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }

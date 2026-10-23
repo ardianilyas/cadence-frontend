@@ -3,8 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { snakeToSpaces } from "@/helpers/snake-to-spaces";
 
 type ProjectStatusBadgeProps = {
-  status: ProjectStatus
-}
+  status: ProjectStatus;
+};
 
 export function ProjectStatusBadge({ status }: ProjectStatusBadgeProps) {
   let className;
@@ -27,9 +27,5 @@ export function ProjectStatusBadge({ status }: ProjectStatusBadgeProps) {
       break;
   }
 
-  return (
-    <Badge className={className}>
-      {snakeToSpaces(status)}
-    </Badge>
-  )
+  return <Badge className={className}>{snakeToSpaces(status)}</Badge>;
 }

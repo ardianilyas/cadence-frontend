@@ -1,26 +1,41 @@
-"use client"
+"use client";
 
 import { Project } from "@/features/project/types/project.type";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UpdateProjectSchema, updateProjectSchema, ProjectStatus } from "@/features/project/schemas/project.schema";
+import {
+  UpdateProjectSchema,
+  updateProjectSchema,
+  ProjectStatus,
+} from "@/features/project/schemas/project.schema";
 import { useUpdateProject } from "@/features/project/hooks/use-update-project";
 import { useEffect } from "react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription, DialogFooter,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -31,7 +46,11 @@ type UpdateProjectDialogProps = {
   onOpenChangeAction: (open: boolean) => void;
 };
 
-export function UpdateProjectDialog({ project, open, onOpenChangeAction }: UpdateProjectDialogProps) {
+export function UpdateProjectDialog({
+  project,
+  open,
+  onOpenChangeAction,
+}: UpdateProjectDialogProps) {
   const form = useForm<UpdateProjectSchema>({
     resolver: zodResolver(updateProjectSchema),
     defaultValues: {
@@ -62,7 +81,7 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
       await mutation.mutateAsync({
         workspaceId: project.workspaceId,
         projectId: project.id,
-        payload: values
+        payload: values,
       });
 
       onOpenChangeAction(false);
@@ -78,10 +97,7 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
           <DialogTitle>Edit Project</DialogTitle>
           <DialogDescription>Update project data</DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
@@ -116,7 +132,9 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
             <Label htmlFor="status">Status</Label>
             <Select
               value={form.watch("status")}
-              onValueChange={(value) => form.setValue("status", value as ProjectStatus)}
+              onValueChange={(value) =>
+                form.setValue("status", value as ProjectStatus)
+              }
               disabled={mutation.isPending}
             >
               <SelectTrigger>
@@ -141,24 +159,30 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
             <div className="space-y-2">
               <Label htmlFor="startDate">Start Date</Label>
               <Popover>
-                <PopoverTrigger render={
-                   <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !form.watch("startDate") && "text-muted-foreground"
-                    )}
-                    disabled={mutation.isPending}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {form.watch("startDate") ? format(form.watch("startDate"), "PPP") : "Pick a date"}
-                  </Button>
-                } />
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !form.watch("startDate") && "text-muted-foreground",
+                      )}
+                      disabled={mutation.isPending}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {form.watch("startDate")
+                        ? format(form.watch("startDate"), "PPP")
+                        : "Pick a date"}
+                    </Button>
+                  }
+                />
                 <PopoverContent className="w-auto p-0">
                   <Calendar
                     mode="single"
                     selected={form.watch("startDate")}
-                    onSelect={(date) => date && form.setValue("startDate", date)}
+                    onSelect={(date) =>
+                      date && form.setValue("startDate", date)
+                    }
                   />
                 </PopoverContent>
               </Popover>
@@ -172,19 +196,23 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
             <div className="space-y-2">
               <Label htmlFor="dueDate">Due Date</Label>
               <Popover>
-                <PopoverTrigger render={
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !form.watch("dueDate") && "text-muted-foreground"
-                    )}
-                    disabled={mutation.isPending}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {form.watch("dueDate") ? format(form.watch("dueDate"), "PPP") : "Pick a date"}
-                  </Button>
-                } />
+                <PopoverTrigger
+                  render={
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !form.watch("dueDate") && "text-muted-foreground",
+                      )}
+                      disabled={mutation.isPending}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {form.watch("dueDate")
+                        ? format(form.watch("dueDate"), "PPP")
+                        : "Pick a date"}
+                    </Button>
+                  }
+                />
                 <PopoverContent className="w-auto p-0">
                   <Calendar
                     mode="single"
@@ -210,5 +238,5 @@ export function UpdateProjectDialog({ project, open, onOpenChangeAction }: Updat
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -15,5 +15,5 @@ export default function WorkspacePage() {
 
       <WorkspaceList />
     </div>
-  )
+  );
 }

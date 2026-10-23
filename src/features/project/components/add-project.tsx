@@ -44,8 +44,12 @@ export function AddProject({ workspaceId }: AddProjectProps) {
   const createProjectMutation = useCreateProject(workspaceId);
 
   const statusSelectItems = useMemo(
-    () => Object.values(ProjectStatus).map((status) => ({ value: status, label: snakeToSpaces(status) })),
-    []
+    () =>
+      Object.values(ProjectStatus).map((status) => ({
+        value: status,
+        label: snakeToSpaces(status),
+      })),
+    [],
   );
 
   const {
@@ -72,7 +76,7 @@ export function AddProject({ workspaceId }: AddProjectProps) {
           reset();
           setOpen(false);
         },
-      }
+      },
     );
   }
 
@@ -88,11 +92,19 @@ export function AddProject({ workspaceId }: AddProjectProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger render={<Button><FolderPlus className="mr-2 size-3.5" /> New project</Button>} />
+      <DialogTrigger
+        render={
+          <Button>
+            <FolderPlus className="mr-2 size-3.5" /> New project
+          </Button>
+        }
+      />
       <DialogContent className="min-w-lg w-full">
         <DialogHeader>
           <DialogTitle>Create Project</DialogTitle>
-          <DialogDescription>Create a new project for your workspace</DialogDescription>
+          <DialogDescription>
+            Create a new project for your workspace
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
@@ -113,9 +125,7 @@ export function AddProject({ workspaceId }: AddProjectProps) {
               )}
             />
             {errors.name && (
-              <p className="text-sm text-destructive">
-                {errors.name.message}
-              </p>
+              <p className="text-sm text-destructive">{errors.name.message}</p>
             )}
           </div>
 
@@ -195,7 +205,9 @@ export function AddProject({ workspaceId }: AddProjectProps) {
                 <Select
                   items={statusSelectItems}
                   value={field.value || null}
-                  onValueChange={(val) => field.onChange(val ?? ProjectStatus.DRAFT)}
+                  onValueChange={(val) =>
+                    field.onChange(val ?? ProjectStatus.DRAFT)
+                  }
                   disabled={createProjectMutation.isPending}
                 >
                   <SelectTrigger
@@ -235,11 +247,10 @@ export function AddProject({ workspaceId }: AddProjectProps) {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              disabled={createProjectMutation.isPending}
-            >
-              {createProjectMutation.isPending ? "Creating..." : "Create Project"}
+            <Button type="submit" disabled={createProjectMutation.isPending}>
+              {createProjectMutation.isPending
+                ? "Creating..."
+                : "Create Project"}
             </Button>
           </DialogFooter>
         </form>

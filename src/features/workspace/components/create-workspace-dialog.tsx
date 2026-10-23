@@ -1,9 +1,12 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { useCreateWorkspace } from "@/features/workspace/hooks/use-create-workspace";
 import { useForm } from "react-hook-form";
-import { createWorkspaceSchema, CreateWorkspaceSchema } from "@/features/workspace/schemas/workspace.schema";
+import {
+  createWorkspaceSchema,
+  CreateWorkspaceSchema,
+} from "@/features/workspace/schemas/workspace.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
@@ -12,7 +15,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +26,12 @@ export function CreateWorkspaceDialog() {
   const [open, setOpen] = useState(false);
   const createWorkspace = useCreateWorkspace();
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<CreateWorkspaceSchema>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateWorkspaceSchema>({
     resolver: zodResolver(createWorkspaceSchema),
     defaultValues: {
       name: "",
@@ -52,7 +60,13 @@ export function CreateWorkspaceDialog() {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger render={<Button><PlusIcon /> Create workspace</Button>} />
+      <DialogTrigger
+        render={
+          <Button>
+            <PlusIcon /> Create workspace
+          </Button>
+        }
+      />
 
       <DialogContent>
         <DialogHeader>
@@ -62,15 +76,9 @@ export function CreateWorkspaceDialog() {
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <label
-              htmlFor="workspace-name"
-              className="text-sm font-medium"
-            >
+            <label htmlFor="workspace-name" className="text-sm font-medium">
               Name
             </label>
 
@@ -83,9 +91,7 @@ export function CreateWorkspaceDialog() {
             />
 
             {errors.name && (
-              <p className="text-sm text-destructive">
-                {errors.name.message}
-              </p>
+              <p className="text-sm text-destructive">{errors.name.message}</p>
             )}
           </div>
 
@@ -122,17 +128,12 @@ export function CreateWorkspaceDialog() {
               Cancel
             </Button>
 
-            <Button
-              type="submit"
-              disabled={createWorkspace.isPending}
-            >
-              {createWorkspace.isPending
-                ? "Creating..."
-                : "Create workspace"}
+            <Button type="submit" disabled={createWorkspace.isPending}>
+              {createWorkspace.isPending ? "Creating..." : "Create workspace"}
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

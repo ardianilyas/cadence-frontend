@@ -7,7 +7,10 @@ export default function NotFound() {
     <div className="flex items-center max-w-xl mx-auto px-8 justify-center min-h-screen">
       <div className="text-center">
         <h1 className="font-bold text-7xl">404</h1>
-        <p className="text-sm sm:text-lg font-light text-neutral-900/80 leading-relaxed mb-4">Oops… this page took a wrong turn. It might be off exploring the internet somewhere. Let’s get you back on track.</p>
+        <p className="text-sm sm:text-lg font-light text-neutral-900/80 leading-relaxed mb-4">
+          Oops… this page took a wrong turn. It might be off exploring the
+          internet somewhere. Let’s get you back on track.
+        </p>
         <Link href="/dashboard">
           <Button>
             <ArrowLeft />
@@ -16,5 +19,5 @@ export default function NotFound() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

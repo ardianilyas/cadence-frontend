@@ -11,7 +11,10 @@ type MemberRowActionsProps = {
   member: WorkspaceMember;
 };
 
-export function MemberRowActions({ workspaceId, member }: MemberRowActionsProps) {
+export function MemberRowActions({
+  workspaceId,
+  member,
+}: MemberRowActionsProps) {
   const [open, setOpen] = useState(false);
   const removeMutation = useRemoveMember(workspaceId);
 
@@ -27,11 +30,7 @@ export function MemberRowActions({ workspaceId, member }: MemberRowActionsProps)
     <>
       {member.role !== "Project_Manager" && (
         <>
-          <Button
-            variant="destructive"
-            size="sm"
-            onClick={() => setOpen(true)}
-          >
+          <Button variant="destructive" size="sm" onClick={() => setOpen(true)}>
             Remove
           </Button>
 

@@ -40,17 +40,22 @@ type AddMemberProps = {
 
 export default function AddMember({ workspaceId }: AddMemberProps) {
   const [open, setOpen] = useState(false);
-  const { data: users, isPending: isLoadingUsers } = useGetAvailableUsers(workspaceId);
+  const { data: users, isPending: isLoadingUsers } =
+    useGetAvailableUsers(workspaceId);
   const addMemberMutation = useAddMember(workspaceId);
 
   const selectItems = useMemo(
     () => users?.map((user) => ({ value: user.id, label: user.name })) ?? [],
-    [users]
+    [users],
   );
 
   const roleSelectItems = useMemo(
-    () => Object.values(WorkspaceRole).map((role) => ({ value: role, label: snakeToSpaces(role) })),
-    []
+    () =>
+      Object.values(WorkspaceRole).map((role) => ({
+        value: role,
+        label: snakeToSpaces(role),
+      })),
+    [],
   );
 
   const {
@@ -74,7 +79,7 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
           reset();
           setOpen(false);
         },
-      }
+      },
     );
   }
 
@@ -90,11 +95,19 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger render={<Button><PlusIcon /> Add Member</Button>} />
+      <DialogTrigger
+        render={
+          <Button>
+            <PlusIcon /> Add Member
+          </Button>
+        }
+      />
       <DialogContent className="min-w-lg w-full">
         <DialogHeader>
           <DialogTitle>Add Member</DialogTitle>
-          <DialogDescription>Add a new member to your workspace</DialogDescription>
+          <DialogDescription>
+            Add a new member to your workspace
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
@@ -126,7 +139,8 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
                     <SelectGroup>
                       {users?.map((user: AvailableUser) => (
                         <SelectItem key={user.id} value={user.id}>
-                          {user.name} - <p className="text-neutral-500">{user.email}</p>
+                          {user.name} -{" "}
+                          <p className="text-neutral-500">{user.email}</p>
                         </SelectItem>
                       ))}
                       {users && users.length === 0 && (
@@ -156,7 +170,9 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
                 <Select
                   items={roleSelectItems}
                   value={field.value || null}
-                  onValueChange={(val) => field.onChange(val ?? WorkspaceRole.Developer)}
+                  onValueChange={(val) =>
+                    field.onChange(val ?? WorkspaceRole.Developer)
+                  }
                   disabled={addMemberMutation.isPending}
                 >
                   <SelectTrigger
@@ -181,9 +197,7 @@ export default function AddMember({ workspaceId }: AddMemberProps) {
             />
 
             {errors.role && (
-              <p className="text-sm text-destructive">
-                {errors.role.message}
-              </p>
+              <p className="text-sm text-destructive">{errors.role.message}</p>
             )}
           </div>
 

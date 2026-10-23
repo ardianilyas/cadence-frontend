@@ -15,11 +15,14 @@ export function WorkspaceDetailSkeleton() {
           <Skeleton className="h-6 w-24" />
           <Skeleton className="h-9 w-24" />
         </div>
-        
+
         {/* Members Table Skeleton */}
         <div className="space-y-2">
           {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="flex items-center gap-4 p-3 border rounded-md">
+            <div
+              key={index}
+              className="flex items-center gap-4 p-3 border rounded-md"
+            >
               <Skeleton className="h-10 w-10 rounded-full" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-4 w-32" />

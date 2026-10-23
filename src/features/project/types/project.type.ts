@@ -9,10 +9,10 @@ export type Project = {
   dueDate: string;
   created_at: string;
   updated_at: string;
-}
+};
 
 export type GetProjectsResponse = {
   success: boolean;
   message: string;
   data: Project[];
-}
+};

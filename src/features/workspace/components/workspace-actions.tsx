@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useState } from "react";
@@ -41,16 +40,17 @@ export function WorkspaceActions({ workspace }: Props) {
           }
         }}
       >
-        <DropdownMenuTrigger render={
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            aria-label="Open workspace actions"
-          >
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        }
+        <DropdownMenuTrigger
+          render={
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label="Open workspace actions"
+            >
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          }
         />
 
         <DropdownMenuContent align="end">
@@ -90,4 +90,3 @@ export function WorkspaceActions({ workspace }: Props) {
     </>
   );
 }
-

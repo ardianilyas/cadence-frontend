@@ -4,7 +4,7 @@ import { Project } from "@/features/project/types/project.type";
 
 export async function createProject(
   workspaceId: string,
-  payload: CreateProjectSchema
+  payload: CreateProjectSchema,
 ): Promise<Project> {
   const response = await api.post<{ data: Project }>(
     `/workspaces/${workspaceId}/projects`,
@@ -12,7 +12,7 @@ export async function createProject(
       ...payload,
       startDate: payload.startDate.toISOString(),
       dueDate: payload.dueDate.toISOString(),
-    }
+    },
   );
 
   return response.data.data;

@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import { WorkspaceDetail } from "@/features/workspace/components/workspace-detail";
 
@@ -23,9 +22,7 @@ async function WorkspaceDetailRoute({ params }: PageProps) {
   return <WorkspaceDetail workspaceId={workspaceId} />;
 }
 
-export default function WorkspaceDetailPage({
-                                              params,
-                                            }: PageProps) {
+export default function WorkspaceDetailPage({ params }: PageProps) {
   return (
     <Suspense fallback={<WorkspaceDetailSkeleton />}>
       <WorkspaceDetailRoute params={params} />

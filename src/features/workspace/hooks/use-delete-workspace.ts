@@ -19,6 +19,6 @@ export function useDeleteWorkspace() {
 
     onError: () => {
       toast.error("Failed to delete workspace");
-    }
-  })
+    },
+  });
 }

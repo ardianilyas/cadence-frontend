@@ -20,5 +20,5 @@ export function useRemoveMember(workspaceId: string) {
 
       toast.success("Member removed successfully");
     },
-  })
+  });
 }

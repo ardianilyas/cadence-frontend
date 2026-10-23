@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useWorkspace } from "@/features/workspace/hooks/use-get-workspace";
 import WorkspaceMembersTable from "@/features/workspace/components/workspace-members-table";
@@ -11,10 +11,15 @@ import { ProjectsList } from "@/features/project/components/projects-list";
 
 type WorkspaceDetailProps = {
   workspaceId: string;
-}
+};
 
 export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
-  const { data: workspace, isPending, isError, refetch } = useWorkspace(workspaceId);
+  const {
+    data: workspace,
+    isPending,
+    isError,
+    refetch,
+  } = useWorkspace(workspaceId);
 
   if (isPending) {
     return <WorkspaceDetailSkeleton />;
@@ -30,9 +35,12 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
             </div>
           </div>
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold tracking-tight">Workspace not found</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Workspace not found
+            </h2>
             <p className="text-muted-foreground">
-              The workspace you're looking for doesn't exist or you don't have access to it.
+              The workspace you're looking for doesn't exist or you don't have
+              access to it.
             </p>
           </div>
           <div className="flex items-center justify-center gap-3">
@@ -76,16 +84,16 @@ export function WorkspaceDetail({ workspaceId }: WorkspaceDetailProps) {
       {workspace.workspaceMembers?.length && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold tracking-tight">
-              Members
-            </h2>
+            <h2 className="text-lg font-semibold tracking-tight">Members</h2>
             <AddMember workspaceId={workspaceId} />
           </div>
 
-          <WorkspaceMembersTable workspaceId={workspaceId} workspaceMembers={workspace.workspaceMembers} />
+          <WorkspaceMembersTable
+            workspaceId={workspaceId}
+            workspaceMembers={workspace.workspaceMembers}
+          />
         </div>
       )}
-
     </div>
-  )
+  );
 }

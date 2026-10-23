@@ -8,11 +8,17 @@ export const useUpdateWorkspace = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, payload } : { id: string, payload: UpdateWorkspaceSchema }) => updateWorkspace(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: string;
+      payload: UpdateWorkspaceSchema;
+    }) => updateWorkspace(id, payload),
 
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: workspaceKeys.lists()
+        queryKey: workspaceKeys.lists(),
       });
 
       toast.success("Workspace updated successfully.");
@@ -20,6 +26,6 @@ export const useUpdateWorkspace = () => {
 
     onError: () => {
       toast.error("Failed to update workspace.");
-    }
+    },
   });
-}
+};

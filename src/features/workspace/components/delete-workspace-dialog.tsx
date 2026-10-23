@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
 import { Workspace } from "@/features/workspace/types/workspace.type";
 import { useDeleteWorkspace } from "@/features/workspace/hooks/use-delete-workspace";
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
-  AlertDialogTitle
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
 type DeleteWorkspaceDialogProps = {
@@ -15,13 +19,17 @@ type DeleteWorkspaceDialogProps = {
   onOpenChangeAction: (open: boolean) => void;
 };
 
-export function DeleteWorkspaceDialog({ workspace, open, onOpenChangeAction }: DeleteWorkspaceDialogProps) {
+export function DeleteWorkspaceDialog({
+  workspace,
+  open,
+  onOpenChangeAction,
+}: DeleteWorkspaceDialogProps) {
   const mutation = useDeleteWorkspace();
 
   async function handleDelete() {
     try {
       await mutation.mutateAsync(workspace.id);
-      onOpenChangeAction(false)
+      onOpenChangeAction(false);
     } catch (e) {
       console.error(e);
     }
@@ -31,12 +39,10 @@ export function DeleteWorkspaceDialog({ workspace, open, onOpenChangeAction }: D
     <AlertDialog open={open} onOpenChange={onOpenChangeAction}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            Delete workspace
-          </AlertDialogTitle>
+          <AlertDialogTitle>Delete workspace</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure want to delete{" "}
-            <strong>{workspace.name}</strong>? This action cannot be undone.
+            Are you sure want to delete <strong>{workspace.name}</strong>? This
+            action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -45,14 +51,18 @@ export function DeleteWorkspaceDialog({ workspace, open, onOpenChangeAction }: D
             Cancel
           </AlertDialogCancel>
 
-          <AlertDialogAction variant="destructive" disabled={mutation.isPending} onClick={(event) => {
-            event.preventDefault();
-            void handleDelete();
-          }}>
+          <AlertDialogAction
+            variant="destructive"
+            disabled={mutation.isPending}
+            onClick={(event) => {
+              event.preventDefault();
+              void handleDelete();
+            }}
+          >
             {mutation.isPending ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

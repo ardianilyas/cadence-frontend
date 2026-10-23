@@ -29,11 +29,7 @@ export function AuthCallback() {
       } catch (err) {
         if (cancelled) return;
 
-        setError(
-          err instanceof Error
-            ? err.message
-            : "Authentication failed",
-        );
+        setError(err instanceof Error ? err.message : "Authentication failed");
       }
     }
 
@@ -48,10 +44,7 @@ export function AuthCallback() {
     return (
       <div className="space-y-3 text-center">
         <p role="alert">{error}</p>
-        <button
-          onClick={() => router.replace("/login")}
-          className="underline"
-        >
+        <button onClick={() => router.replace("/login")} className="underline">
           Back to login
         </button>
       </div>

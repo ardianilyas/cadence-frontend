@@ -1,18 +1,22 @@
-"use client"
+"use client";
 
 import { Workspace } from "@/features/workspace/types/workspace.type";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UpdateWorkspaceSchema, updateWorkspaceSchema } from "@/features/workspace/schemas/workspace.schema";
+import {
+  UpdateWorkspaceSchema,
+  updateWorkspaceSchema,
+} from "@/features/workspace/schemas/workspace.schema";
 import { useUpdateWorkspace } from "@/features/workspace/hooks/use-update-workspace";
 import { useEffect } from "react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription, DialogFooter,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -25,12 +29,16 @@ type UpdateWorkspaceDialogProps = {
   onOpenChangeAction: (open: boolean) => void;
 };
 
-export function UpdateWorkspaceDialog({ workspace, open, onOpenChangeAction }: UpdateWorkspaceDialogProps) {
+export function UpdateWorkspaceDialog({
+  workspace,
+  open,
+  onOpenChangeAction,
+}: UpdateWorkspaceDialogProps) {
   const form = useForm({
     resolver: zodResolver(updateWorkspaceSchema),
     defaultValues: {
       name: workspace.name,
-      description: workspace.description
+      description: workspace.description,
     },
   });
 
@@ -40,7 +48,7 @@ export function UpdateWorkspaceDialog({ workspace, open, onOpenChangeAction }: U
     if (open) {
       form.reset({
         name: workspace.name,
-        description: workspace.description
+        description: workspace.description,
       });
     }
   }, [open, workspace, form]);
@@ -49,7 +57,7 @@ export function UpdateWorkspaceDialog({ workspace, open, onOpenChangeAction }: U
     try {
       await mutation.mutateAsync({
         id: workspace.id,
-        payload: values
+        payload: values,
       });
 
       onOpenChangeAction(false);
@@ -65,10 +73,7 @@ export function UpdateWorkspaceDialog({ workspace, open, onOpenChangeAction }: U
           <DialogTitle>Edit Workspace</DialogTitle>
           <DialogDescription>Update workspace data</DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
@@ -108,5 +113,5 @@ export function UpdateWorkspaceDialog({ workspace, open, onOpenChangeAction }: U
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

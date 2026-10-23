@@ -40,16 +40,17 @@ export function ProjectActions({ project }: Props) {
           }
         }}
       >
-        <DropdownMenuTrigger render={
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            aria-label="Open project actions"
-          >
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        }
+        <DropdownMenuTrigger
+          render={
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              aria-label="Open project actions"
+            >
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          }
         />
 
         <DropdownMenuContent align="end">
